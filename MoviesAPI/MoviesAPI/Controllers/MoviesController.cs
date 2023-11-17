@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,21 +19,7 @@ namespace MoviesAPI.Controllers
         {
             _context = context;
         }
-
-        // POST: api/Movies
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
         
-
-        // DELETE: api/Movies/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-
         // GET: api/Movies
         [HttpGet]
         public IActionResult Get()
@@ -63,12 +49,23 @@ namespace MoviesAPI.Controllers
             return StatusCode(201, movie);
         }
 
-        //Put: api/Movies/5
-        //[HttpPut("{id")]
-        //public IActionResult Put(int id, [FromBody] Movie movie)
-        //{
-        //    var movie = _context.Movies.Update(id);
-        //    return StatusCode(200, movie);
-        //}
+        //Put: api/Movies/7
+        [HttpPut("{id")]
+        public IActionResult Put(int id, [FromBody] Movie NewMovie)
+        {
+            var movie = _context.Movies.Find(id);
+            movie.Id = NewMovie.Id;
+            return StatusCode(200, movie);
+        }
+
+        //DELETE: api/Movies/5
+        [HttpDelete("{id")]
+        public IActionResult Delete(int Id)
+        {
+            var removedId = _context.Movies.Find(Id);
+            _context.Movies.Remove(removedId);
+            _context.SaveChanges();
+            return NoContent();
+        }
     }
 }
